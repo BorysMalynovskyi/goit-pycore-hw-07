@@ -94,9 +94,7 @@ class Birthday(Field):
             self._value = parsed_date
             return
 
-        raise ValueError(
-            "Birthday must be a datetime instance or string in DD.MM.YYYY format."
-        )
+        raise ValueError("Birthday must be a datetime instance or string in DD.MM.YYYY format.")
 
     def __str__(self) -> str:
         if not self.value:
@@ -240,9 +238,7 @@ def format_unknown_command_message(raw_command: Optional[str]) -> str:
 @input_error
 def add_contact(args: List[str], book: AddressBook) -> str:
     if len(args) < 2:
-        raise ValueError(
-            f"Missing arguments. Usage: {COMMAND_TEMPLATES[Command.ADD]}"
-        )
+        raise ValueError(f"Missing arguments. Usage: {COMMAND_TEMPLATES[Command.ADD]}")
     name, phone, *_ = args
     record = book.find(name)
     message = "Contact updated."
@@ -258,9 +254,7 @@ def add_contact(args: List[str], book: AddressBook) -> str:
 @input_error
 def change_phone(args: List[str], book: AddressBook) -> str:
     if len(args) < 3:
-        raise ValueError(
-            f"Missing arguments. Usage: {COMMAND_TEMPLATES[Command.CHANGE]}"
-        )
+        raise ValueError(f"Missing arguments. Usage: {COMMAND_TEMPLATES[Command.CHANGE]}")
     name, old_phone, new_phone, *_ = args
     record = book.find(name)
     if record is None:
@@ -272,9 +266,7 @@ def change_phone(args: List[str], book: AddressBook) -> str:
 @input_error
 def show_phone(args: List[str], book: AddressBook) -> str:
     if not args:
-        raise ValueError(
-            f"Missing contact name. Usage: {COMMAND_TEMPLATES[Command.PHONE]}"
-        )
+        raise ValueError(f"Missing contact name. Usage: {COMMAND_TEMPLATES[Command.PHONE]}")
     name, *_ = args
     record = book.find(name)
     if record is None:
@@ -287,9 +279,7 @@ def show_phone(args: List[str], book: AddressBook) -> str:
 @input_error
 def show_all(args: List[str], book: AddressBook) -> str:
     if args:
-        raise ValueError(
-            f"No extra arguments expected. Usage: {COMMAND_TEMPLATES[Command.ALL]}"
-        )
+        raise ValueError(f"No extra arguments expected. Usage: {COMMAND_TEMPLATES[Command.ALL]}")
     if not book.data:
         return "Address book is empty."
     return "\n".join(str(record) for record in book.data.values())
@@ -298,9 +288,7 @@ def show_all(args: List[str], book: AddressBook) -> str:
 @input_error
 def add_birthday(args: List[str], book: AddressBook) -> str:
     if len(args) < 2:
-        raise ValueError(
-            f"Missing arguments. Usage: {COMMAND_TEMPLATES[Command.ADD_BIRTHDAY]}"
-        )
+        raise ValueError(f"Missing arguments. Usage: {COMMAND_TEMPLATES[Command.ADD_BIRTHDAY]}")
     name, birthday_str, *_ = args
     record = book.find(name)
     if record is None:
@@ -313,9 +301,7 @@ def add_birthday(args: List[str], book: AddressBook) -> str:
 @input_error
 def show_birthday(args: List[str], book: AddressBook) -> str:
     if not args:
-        raise ValueError(
-            f"Missing contact name. Usage: {COMMAND_TEMPLATES[Command.SHOW_BIRTHDAY]}"
-        )
+        raise ValueError(f"Missing contact name. Usage: {COMMAND_TEMPLATES[Command.SHOW_BIRTHDAY]}")
     name, *_ = args
     record = book.find(name)
     if record is None:
@@ -328,9 +314,7 @@ def show_birthday(args: List[str], book: AddressBook) -> str:
 @input_error
 def birthdays(args: List[str], book: AddressBook) -> str:
     if args:
-        raise ValueError(
-            f"No extra arguments expected. Usage: {COMMAND_TEMPLATES[Command.BIRTHDAYS]}"
-        )
+        raise ValueError(f"No extra arguments expected. Usage: {COMMAND_TEMPLATES[Command.BIRTHDAYS]}")
     today: date = datetime.today().date()
     upcoming: Dict[date, List[str]] = {}
     for record in book.data.values():
@@ -360,9 +344,7 @@ def birthdays(args: List[str], book: AddressBook) -> str:
 @input_error
 def show_commands(args: List[str], _: AddressBook) -> str:
     if args:
-        raise ValueError(
-            f"No extra arguments expected. Usage: {COMMAND_TEMPLATES[Command.HELP]}"
-        )
+        raise ValueError(f"No extra arguments expected. Usage: {COMMAND_TEMPLATES[Command.HELP]}")
     return "Available commands:\n" + _command_usage_summary()
 
 
